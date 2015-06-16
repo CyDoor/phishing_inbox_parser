@@ -45,3 +45,4 @@ Temporary Items
 .idea
 *.msg
 CONFIG.py
+*.pyc

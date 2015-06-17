@@ -1,4 +1,4 @@
-__author__ = 'F9XK3LI'
+__author__ = 'Leo'
 
 import time
 import win32com.client
@@ -38,10 +38,6 @@ def get_urls(message):
 def get_header_and_attachments(message):
     dict = {}
     #https://msdn.microsoft.com/en-us/library/microsoft.office.interop.outlook.mailitem_properties.aspx
-    #print message.Sender.Address
-    #print message.Recipients
-    #print message.ReplyRecipients
-    #print message.ReplyRecipientNames
     crossMSN = message.PropertyAccessor.GetProperty("http://schemas.microsoft.com/mapi/proptag/0x007D001F")
     for line in crossMSN.split("\r\n"):
         key_values = line.split(":")
@@ -67,7 +63,10 @@ def absolute_paths(directory):
         for f in filenames:
             yield os.path.abspath(os.path.join(dirpath, f))
 
-if __name__ == "__main__":
-    #get_emails_from_shared()
-    for file_path in absolute_paths("attachments"):
+def main():
+    get_emails_from_shared()
+    for file_path in absolute_paths(MESSAGE_PATH):
         pprint.pprint(get_header_and_attachments(parse_email(file_path)))
+        
+if __name__ == "__main__":
+    main()
